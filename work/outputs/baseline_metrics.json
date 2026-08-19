@@ -1,0 +1,14 @@
+{
+  "precision_at_10": 0.6,
+  "lift_at_10": 2.09,
+  "precision_at_20": 0.5,
+  "lift_at_20": 1.75,
+  "precision_at_50": 0.42,
+  "lift_at_50": 1.47,
+  "precision_at_100": 0.39,
+  "lift_at_100": 1.36,
+  "precision_at_200": 0.39,
+  "lift_at_200": 1.36,
+  "base_rate": 0.2864,
+  "total_pages": 92548
+}
