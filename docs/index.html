@@ -7,21 +7,27 @@
     <meta name="description" content="A data-driven study of 92,548 web pages across 40 clients showing that a hand-crafted rule baseline outperforms ML models at identifying pages likely to experience traffic decline.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f1117;
-            --surface: #1a1d27;
-            --border: #2a2d3a;
-            --text: #e4e4e7;
-            --text-muted: #9ca3af;
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --green: #10b981;
-            --orange: #f97316;
-            --red: #ef4444;
-            --purple: #a78bfa;
-            --yellow: #f59e0b;
+            --bg: #F8FAF9;
+            --surface: #ffffff;
+            --ink: #0a1e1f;
+            --ink-75: rgba(10, 30, 31, 0.75);
+            --ink-55: rgba(10, 30, 31, 0.55);
+            --ink-08: rgba(10, 30, 31, 0.08);
+            --border: #DDE4E7;
+            --border-light: #E4EAED;
+            --accent: #54E399;
+            --accent-dark: #1A7A4A;
+            --accent-bg: rgba(84, 227, 153, 0.10);
+            --accent-border: rgba(84, 227, 153, 0.30);
+            --hero-bg: #051F21;
+            --hero-text: #f0f4f2;
+            --hero-muted: rgba(240, 244, 242, 0.65);
+            --warn: #D97706;
+            --warn-bg: rgba(217, 119, 6, 0.08);
+            --warn-border: rgba(217, 119, 6, 0.30);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,101 +35,202 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
-            color: var(--text);
+            color: var(--ink);
             line-height: 1.7;
             font-size: 16px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 820px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
-        /* Header */
-        header {
-            padding: 60px 0 40px;
-            border-bottom: 1px solid var(--border);
+        /* ─── Hero ─── */
+        .hero {
+            background: var(--hero-bg);
+            background-image:
+                radial-gradient(ellipse at 60% 40%, rgba(84, 227, 153, 0.10), transparent 55%);
+            color: var(--hero-text);
+            padding: 64px 0 56px;
+            position: relative;
+            overflow: hidden;
         }
-        header h1 {
-            font-size: 2.2rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+        .hero .container { position: relative; }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--accent-border);
+            background: var(--accent-bg);
+            border-radius: 9999px;
+            padding: 6px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
             font-weight: 700;
-            line-height: 1.25;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.04em;
             margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--accent-light), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            max-width: 700px;
         }
-        .meta {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+        .hero-sub {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--hero-muted);
+            max-width: 620px;
         }
-        .meta a { color: var(--accent-light); text-decoration: none; }
-        .meta a:hover { text-decoration: underline; }
+        .hero-sub a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .hero-sub a:hover { text-decoration: underline; }
 
-        /* Sections */
-        section {
-            padding: 40px 0;
-            border-bottom: 1px solid var(--border);
+        /* ─── Sections ─── */
+        section { padding: 48px 0; }
+        section + section { border-top: 1px solid var(--border-light); }
+
+        .section-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-dark);
+            margin-bottom: 16px;
         }
-        section:last-of-type { border-bottom: none; }
+        .section-eyebrow::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--accent-dark);
+        }
 
         h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: clamp(1.6rem, 3.5vw, 2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            color: var(--ink);
             margin-bottom: 20px;
-            color: var(--accent-light);
         }
         h3 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin: 24px 0 12px;
-            color: var(--text);
+            margin: 28px 0 12px;
+            color: var(--ink);
         }
+        p { margin-bottom: 16px; color: var(--ink-75); }
+        strong { color: var(--ink); font-weight: 600; }
 
-        p { margin-bottom: 16px; }
-
-        strong { color: #fff; font-weight: 600; }
-
-        /* Abstract box */
+        /* ─── Abstract card ─── */
         .abstract {
             background: var(--surface);
-            border-left: 4px solid var(--accent);
-            padding: 24px 28px;
-            border-radius: 0 8px 8px 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
             margin: 20px 0;
         }
-        .abstract p { margin-bottom: 10px; }
+        .abstract p { margin-bottom: 12px; font-size: 0.95rem; }
         .abstract p:last-child { margin-bottom: 0; }
 
-        /* Tables */
+        /* ─── Tables ─── */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
             font-size: 0.9rem;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
         }
         th, td {
-            padding: 10px 14px;
+            padding: 12px 16px;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-light);
         }
+        tr:last-child td { border-bottom: none; }
         th {
-            background: var(--surface);
+            background: var(--bg);
             font-weight: 600;
-            color: var(--accent-light);
-            font-size: 0.85rem;
+            color: var(--ink);
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        tr:hover { background: rgba(59, 130, 246, 0.05); }
-        .highlight-row { background: rgba(59, 130, 246, 0.1); font-weight: 600; }
-        .best-mark { color: var(--green); font-weight: 600; }
-        .warn-mark { color: var(--orange); }
+        .highlight-row { background: var(--accent-bg); font-weight: 600; }
+        .best-mark {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-dark);
+            background: var(--accent-bg);
+            border: 1px solid var(--accent-border);
+            border-radius: 9999px;
+            padding: 2px 10px;
+            margin-left: 8px;
+        }
 
-        /* Charts */
+        /* ─── Cards (findings, limitations) ─── */
+        .finding {
+            background: var(--surface);
+            border: 1px solid var(--accent-border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 24px 0;
+        }
+        .finding-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--accent-dark);
+            margin-bottom: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+        .finding-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .limitation {
+            background: var(--surface);
+            border: 1px solid var(--warn-border);
+            border-left: 3px solid var(--warn);
+            border-radius: 0 12px 12px 0;
+            padding: 16px 20px;
+            margin: 12px 0;
+        }
+        .limitation strong { color: var(--warn); }
+        .limitation p { margin-bottom: 0; font-size: 0.9rem; }
+
+        /* ─── Charts ─── */
         .chart-container {
             margin: 28px 0;
             text-align: center;
@@ -131,92 +238,70 @@
         .chart-container img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 12px;
             border: 1px solid var(--border);
         }
         .chart-caption {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.82rem;
+            color: var(--ink-55);
             margin-top: 10px;
             font-style: italic;
         }
 
-        /* Lists */
-        ul, ol {
-            margin: 12px 0 16px 24px;
-        }
+        /* ─── Lists ─── */
+        ul, ol { margin: 12px 0 16px 24px; color: var(--ink-75); }
         li { margin-bottom: 8px; }
 
-        /* Key finding box */
-        .finding {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
-            border: 1px solid var(--accent);
-            padding: 20px 24px;
-            border-radius: 8px;
-            margin: 24px 0;
-        }
-        .finding-title {
-            font-weight: 700;
-            color: var(--green);
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Warning box */
-        .limitation {
-            background: rgba(249, 115, 22, 0.08);
-            border-left: 4px solid var(--orange);
-            padding: 16px 20px;
-            border-radius: 0 8px 8px 0;
-            margin: 12px 0;
-        }
-        .limitation strong { color: var(--orange); }
-
-        /* Code / mono */
+        /* ─── Code ─── */
         code {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85em;
-            background: var(--surface);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--accent-light);
+            font-size: 0.82em;
+            background: var(--ink-08);
+            padding: 2px 7px;
+            border-radius: 6px;
+            color: var(--ink);
         }
 
-        /* Footer */
+        /* ─── Links ─── */
+        a { color: var(--accent-dark); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ─── Footer ─── */
         footer {
             padding: 40px 0;
             text-align: center;
-            color: var(--text-muted);
+            color: var(--ink-55);
             font-size: 0.85rem;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--border-light);
         }
-        footer a { color: var(--accent-light); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
 
-        /* Responsive */
+        /* ─── Responsive ─── */
         @media (max-width: 640px) {
-            header h1 { font-size: 1.6rem; }
-            h2 { font-size: 1.25rem; }
+            .hero h1 { font-size: 1.75rem; }
+            h2 { font-size: 1.35rem; }
             .container { padding: 0 16px; }
             table { font-size: 0.8rem; }
             th, td { padding: 8px 10px; }
+            .abstract { padding: 20px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="container">
+            <div class="hero-eyebrow">ML Track &middot; Capstone</div>
+            <h1>Predicting Content Decay in Search: When Rules Beat Models</h1>
+            <p class="hero-sub">FlyRank ML Internship &middot; March 2026 &middot; <a href="https://github.com/Artasam/Machine-Learning" target="_blank">Repository &rarr;</a></p>
+        </div>
+    </div>
+
     <div class="container">
 
-        <!-- HEADER -->
-        <header>
-            <h1>Predicting Content Decay in Search: When Rules Beat Models</h1>
-            <p class="meta">FlyRank ML Internship &middot; March 2026 &middot; <a href="https://github.com/Artasam/Machine-Learning" target="_blank">Repository</a></p>
-        </header>
-
-        <!-- 1. ABSTRACT -->
+        <!-- ABSTRACT -->
         <section>
-            <h2>Abstract</h2>
+            <div class="section-eyebrow">Abstract</div>
             <div class="abstract">
                 <p><strong>Question:</strong> Out of thousands of web pages managed by FlyRank, which ones are most likely to experience a traffic decline &mdash; and should be reviewed first?</p>
                 <p><strong>Data:</strong> 92,548 pages across 40 pseudonymised clients from the FlyRank internship warehouse (March 2026, Google Search Console metrics). Features derived from Mar&nbsp;1&ndash;15; label from Mar&nbsp;16&ndash;31.</p>
@@ -226,20 +311,22 @@
             </div>
         </section>
 
-        <!-- 2. INTRODUCTION / PROBLEM -->
+        <!-- 1. THE PROBLEM -->
         <section>
-            <h2>1. The Problem</h2>
-            <p>FlyRank builds content as infrastructure: it researches, writes, and publishes content into client websites, then watches search data and optimises. Content that once ranked well in Google Search quietly decays &mdash; rankings slip, impressions drop, and by the time someone notices, the page has already lost significant traffic.</p>
+            <div class="section-eyebrow">01 &mdash; Question</div>
+            <h2>The Problem</h2>
+            <p>FlyRank manages thousands of content pages across dozens of client websites. Content that once ranked well in Google Search quietly decays &mdash; rankings slip, impressions drop, and by the time someone notices, the page has already lost significant traffic.</p>
             <p><strong>The decision this supports:</strong> A content operations team opens a dashboard on Monday morning. They have capacity to review 50 pages this week. Out of 92,548 pages &mdash; which 50 should they look at first, and why?</p>
             <p>This is a <strong>ranking problem</strong> (prioritise the most at-risk pages), not a classification problem (predict yes/no for each page). The metric that matters is <strong>Precision@K</strong> &mdash; of the top K pages we flag, how many actually declined?</p>
         </section>
 
-        <!-- 3. DATA -->
+        <!-- 2. DATA -->
         <section>
-            <h2>2. Data</h2>
+            <div class="section-eyebrow">02 &mdash; Data</div>
+            <h2>Data</h2>
             <table>
                 <tr><th>Property</th><th>Value</th></tr>
-                <tr><td>Source</td><td>FlyRank Internship Warehouse (<a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank" style="color:var(--accent-light)">HuggingFace</a>)</td></tr>
+                <tr><td>Source</td><td>FlyRank Internship Warehouse (<a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank">HuggingFace</a>)</td></tr>
                 <tr><td>Table</td><td><code>fact_content_daily_performance</code> (March 2026)</td></tr>
                 <tr><td>Total pages</td><td><strong>92,548</strong></td></tr>
                 <tr><td>Total clients</td><td><strong>40</strong> (pseudonymised)</td></tr>
@@ -251,9 +338,10 @@
             <p>All client and content IDs are hashed. No private names, URLs, or raw queries appear anywhere in this study.</p>
         </section>
 
-        <!-- 4. METHODOLOGY -->
+        <!-- 3. METHODOLOGY -->
         <section>
-            <h2>3. Methodology</h2>
+            <div class="section-eyebrow">03 &mdash; Methodology</div>
+            <h2>Methodology</h2>
 
             <h3>Label definition</h3>
             <p>A page is labelled <code>is_declining = 1</code> if its total impressions in Mar 16&ndash;31 dropped more than 20% relative to Mar 1&ndash;15. This yields a base rate of <strong>28.6%</strong> across the full pool.</p>
@@ -261,42 +349,42 @@
             <h3>Features (4 traffic signals)</h3>
             <table>
                 <tr><th>Feature</th><th>Description</th></tr>
-                <tr><td><code>log_prev_impressions</code></td><td>Log-transformed total impressions in Mar 1&ndash;15 (volume signal)</td></tr>
-                <tr><td><code>prev_ctr</code></td><td>Click-through rate in Mar 1&ndash;15 (engagement signal)</td></tr>
-                <tr><td><code>prev_avg_position</code></td><td>Average search position in Mar 1&ndash;15 (ranking signal)</td></tr>
-                <tr><td><code>prev_days_active</code></td><td>Days with &gt; 0 impressions in Mar 1&ndash;15 (consistency signal)</td></tr>
+                <tr><td><code>log_prev_impressions</code></td><td>Log-transformed total impressions (volume signal)</td></tr>
+                <tr><td><code>prev_ctr</code></td><td>Click-through rate (engagement signal)</td></tr>
+                <tr><td><code>prev_avg_position</code></td><td>Average search position (ranking signal)</td></tr>
+                <tr><td><code>prev_days_active</code></td><td>Days with &gt; 0 impressions (consistency signal)</td></tr>
             </table>
 
             <h3>Rule Baseline</h3>
-            <p>Each page is scored as: <code>log1p(impressions) &times; position_tier_weight &times; ctr_shield</code>. Position tiers (top-3, page-1, striking distance 11&ndash;20, page 3&ndash;5, deep) receive different weights reflecting opportunity size. This mirrors FlyRank&rsquo;s existing flag-based workflow.</p>
+            <p>Each page is scored as: <code>log1p(impressions) &times; position_tier_weight &times; ctr_shield</code>. Position tiers (top-3, page-1, striking distance 11&ndash;20, page 3&ndash;5, deep) receive different weights reflecting opportunity size.</p>
 
             <h3>ML models compared</h3>
             <ul>
-                <li><strong>Logistic Regression</strong> (StandardScaler, default hyperparameters)</li>
-                <li><strong>Random Forest</strong> (300 trees, max_depth=6, min_samples_leaf=50)</li>
-                <li><strong>LightGBM</strong> (300 trees, max_depth=6, learning_rate=0.05, min_child_samples=50)</li>
+                <li><strong>Logistic Regression</strong> &mdash; StandardScaler, default hyperparameters</li>
+                <li><strong>Random Forest</strong> &mdash; 300 trees, max_depth=6, min_samples_leaf=50</li>
+                <li><strong>LightGBM</strong> &mdash; 300 trees, max_depth=6, learning_rate=0.05</li>
             </ul>
 
             <h3>Validation design</h3>
             <p><strong>GroupShuffleSplit by <code>client_hash_id</code></strong> (80/20): 32 clients in train, 8 entirely unseen clients in test (22,531 pages, test base rate 37.0%). This tests: <em>&ldquo;Does it work on a client it has never seen?&rdquo;</em></p>
 
             <h3>Leakage audit</h3>
-            <p>Three tests confirmed zero leakage:</p>
             <ol>
-                <li><strong>Label-derived feature test:</strong> Deliberately injecting <code>imp_last15</code> into features caused P@K to jump to 1.000 &mdash; confirming the harness detects leakage, and confirming it was correctly excluded.</li>
+                <li><strong>Label-derived feature test:</strong> Injecting <code>imp_last15</code> into features caused P@K to jump to 1.000 &mdash; confirming the harness detects leakage.</li>
                 <li><strong>Window overlap audit:</strong> All features use <code>report_date &le; 2026-03-15</code>; the label uses <code>report_date &gt; 2026-03-15</code>. Zero-day overlap.</li>
                 <li><strong>Product flag audit:</strong> All 7 FlyRank product flags confirmed absent from the feature set.</li>
             </ol>
         </section>
 
-        <!-- 5. RESULTS -->
+        <!-- 4. RESULTS -->
         <section>
-            <h2>4. Results</h2>
+            <div class="section-eyebrow">04 &mdash; Results</div>
+            <h2>Results</h2>
             <p>All four systems evaluated on the <strong>same grouped test set</strong> (8 unseen clients, 22,531 pages, base rate 37.0%):</p>
 
             <table>
                 <tr><th>Model</th><th>P@10</th><th>P@20</th><th>P@50</th><th>P@100</th><th>P@200</th></tr>
-                <tr class="highlight-row"><td>Rule Baseline (ML-07) <span class="best-mark">&larr; BEST</span></td><td>0.60</td><td>0.75</td><td>0.64</td><td>0.60</td><td>0.54</td></tr>
+                <tr class="highlight-row"><td>Rule Baseline <span class="best-mark">Best</span></td><td>0.60</td><td>0.75</td><td>0.64</td><td>0.60</td><td>0.54</td></tr>
                 <tr><td>LightGBM</td><td>0.40</td><td>0.40</td><td>0.44</td><td>0.49</td><td>0.52</td></tr>
                 <tr><td>Random Forest</td><td>0.10</td><td>0.20</td><td>0.26</td><td>0.29</td><td>0.42</td></tr>
                 <tr><td>Logistic Regression</td><td>0.20</td><td>0.15</td><td>0.20</td><td>0.22</td><td>0.24</td></tr>
@@ -310,37 +398,37 @@
 
             <div class="chart-container">
                 <img src="img/chart_precision_at_k.png" alt="Precision at K comparison chart">
-                <p class="chart-caption">Figure 1: The rule baseline (blue solid) leads at every K up to ~150. All systems converge toward the base rate as K grows.</p>
+                <p class="chart-caption">Figure 1: The rule baseline leads at every K. All systems converge toward the base rate as K grows.</p>
             </div>
 
             <h3>The Memorisation Gap</h3>
-            <p>Under <strong>random split</strong>, LightGBM achieved P@20 = 0.90. Under <strong>grouped split</strong> (unseen clients), the same model achieved P@20 = 0.40. The <strong>50 percentage point gap</strong> revealed that the model was memorising client identity &mdash; learning &ldquo;which client tends to decline&rdquo; rather than &ldquo;which page-level signals predict decline.&rdquo;</p>
+            <p>Under <strong>random split</strong>, LightGBM achieved P@20 = 0.90. Under <strong>grouped split</strong> (unseen clients), the same model achieved P@20 = 0.40. The <strong>50 percentage point gap</strong> revealed that the model was memorising client identity rather than learning page-level decay signals.</p>
 
             <div class="chart-container">
                 <img src="img/chart_feature_importance.png" alt="Feature importance chart">
-                <p class="chart-caption">Figure 2: No single feature dominates (&gt;80%), confirming no leakage signal. Position (32%) and volume (31%) are the primary drivers.</p>
+                <p class="chart-caption">Figure 2: No single feature dominates (&gt;80%), confirming no leakage signal.</p>
             </div>
         </section>
 
-        <!-- 6. LIMITATIONS -->
+        <!-- 5. LIMITATIONS -->
         <section>
-            <h2>5. Limitations</h2>
-            <p>Writing this section before a reviewer does is what earns trust.</p>
+            <div class="section-eyebrow">05 &mdash; Limitations</div>
+            <h2>Limitations</h2>
 
             <div class="limitation">
-                <p><strong>Single time period.</strong> All results are from March 2026 (one 15-day feature window, one 16-day label window). Seasonal effects, Google algorithm updates, and industry trends from other months are not captured.</p>
+                <p><strong>Single time period.</strong> All results are from March 2026. Seasonal effects, algorithm updates, and industry trends from other months are not captured.</p>
             </div>
             <div class="limitation">
-                <p><strong>Limited client pool.</strong> 40 pseudonymised clients; validation used only 8 unseen clients. Performance on clients in different industries, languages, or content types is unknown.</p>
+                <p><strong>Limited client pool.</strong> 40 clients; validation used only 8 unseen clients. Performance on clients in different industries is unknown.</p>
             </div>
             <div class="limitation">
-                <p><strong>Only 4 traffic features.</strong> No content-level signals (page age, word count, keyword difficulty, topic embeddings). This is why ML models struggle to generalise &mdash; too few signals to distinguish page-level decay from client-level noise.</p>
+                <p><strong>Only 4 traffic features.</strong> No content-level signals (page age, word count, topic embeddings). This is why ML models struggle to generalise.</p>
             </div>
             <div class="limitation">
-                <p><strong>Arbitrary label threshold.</strong> The 20% decline cutoff creates a binary label from a continuous distribution. A page dropping from 60 to 48 impressions crosses the threshold; a page dropping from 10,000 to 8,001 does not.</p>
+                <p><strong>Arbitrary label threshold.</strong> The 20% decline cutoff creates a binary label from a continuous distribution.</p>
             </div>
             <div class="limitation">
-                <p><strong>No causal evidence.</strong> This is observational data. We observed an association between the rule score and subsequent decline &mdash; we did not prove that refreshing high-scored pages would recover traffic. A controlled experiment would be required.</p>
+                <p><strong>No causal evidence.</strong> We observed an association between the rule score and subsequent decline &mdash; we did not prove that refreshing high-scored pages would recover traffic.</p>
             </div>
 
             <div class="chart-container">
@@ -349,52 +437,57 @@
             </div>
         </section>
 
-        <!-- 7. RECOMMENDATIONS -->
+        <!-- 6. RECOMMENDATIONS -->
         <section>
-            <h2>6. Recommendations</h2>
-            <p>These recommendations are <strong>directional and decision-supportive</strong> &mdash; they say &ldquo;look here first,&rdquo; not &ldquo;this will work.&rdquo;</p>
+            <div class="section-eyebrow">06 &mdash; Recommendations</div>
+            <h2>Recommendations</h2>
 
             <h3>For FlyRank&rsquo;s content team</h3>
             <ol>
-                <li><strong>Use the rule-based queue, not the ML model.</strong> The rule achieved P@50 = 0.64 on unseen clients vs LightGBM&rsquo;s 0.44. Until richer features are available, the rule is the production-ready tool.</li>
-                <li><strong>Prioritise striking-distance pages (position 11&ndash;20).</strong> These pages offer the highest ROI from small ranking improvements.</li>
-                <li><strong>Always apply the human review checklist.</strong> Before refreshing any flagged page, check: seasonality, algorithm updates, factual accuracy, client activity, and business value.</li>
-                <li><strong>Re-run the queue monthly.</strong> Traffic patterns shift; the queue uses a 15-day feature window and will go stale after 30 days.</li>
+                <li><strong>Use the rule-based queue, not the ML model.</strong> The rule achieved P@50 = 0.64 on unseen clients vs LightGBM&rsquo;s 0.44.</li>
+                <li><strong>Prioritise striking-distance pages (position 11&ndash;20).</strong> These offer the highest ROI from small ranking improvements.</li>
+                <li><strong>Always apply the human review checklist</strong> before refreshing any flagged page.</li>
+                <li><strong>Re-run the queue monthly.</strong> Traffic patterns shift; the queue uses a 15-day window.</li>
             </ol>
 
             <h3>For future model improvement</h3>
             <ol start="5">
-                <li><strong>Add content-level features</strong> &mdash; content age, keyword difficulty, text embeddings would give ML models signals to distinguish page-level decay from client-level noise.</li>
-                <li><strong>Use GroupKFold</strong> instead of GroupShuffleSplit for more stable generalisation estimates.</li>
-                <li><strong>Run a controlled experiment</strong> &mdash; randomly assign flagged pages to &ldquo;refresh&rdquo; vs &ldquo;hold&rdquo; groups to measure actual causal impact.</li>
+                <li><strong>Add content-level features</strong> &mdash; content age, keyword difficulty, text embeddings.</li>
+                <li><strong>Use GroupKFold</strong> for more stable generalisation estimates.</li>
+                <li><strong>Run a controlled experiment</strong> to measure actual causal impact.</li>
             </ol>
         </section>
 
-        <!-- 8. REPRODUCIBILITY -->
+        <!-- 7. REPRODUCIBILITY -->
         <section>
-            <h2>7. Reproducibility</h2>
+            <div class="section-eyebrow">07 &mdash; Reproducibility</div>
+            <h2>Reproducibility</h2>
             <table>
                 <tr><th>Property</th><th>Value</th></tr>
-                <tr><td>Repository</td><td><a href="https://github.com/Artasam/Machine-Learning" target="_blank" style="color:var(--accent-light)">github.com/Artasam/Machine-Learning</a></td></tr>
+                <tr><td>Repository</td><td><a href="https://github.com/Artasam/Machine-Learning" target="_blank">github.com/Artasam/Machine-Learning</a></td></tr>
                 <tr><td>Random seed</td><td><code>42</code> (all operations)</td></tr>
-                <tr><td>Data</td><td><a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank" style="color:var(--accent-light)">FlyRank/internship-warehouse</a> (gated, instant approval)</td></tr>
+                <tr><td>Data</td><td><a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank">FlyRank/internship-warehouse</a></td></tr>
                 <tr><td>How to rerun</td><td>Open <code>capstone.ipynb</code> in Colab &rarr; add HF token &rarr; Run all</td></tr>
-                <tr><td>Notebooks</td><td>ML-06 through ML-11, all in <code>work/notebooks/</code></td></tr>
+                <tr><td>Notebooks</td><td>ML-06 through ML-11 in <code>work/notebooks/</code></td></tr>
                 <tr><td>Outputs</td><td>All metrics as JSON in <code>work/outputs/</code></td></tr>
             </table>
         </section>
 
-        <!-- 9. ACKNOWLEDGMENTS -->
+        <!-- 8. ACKNOWLEDGMENTS -->
         <section>
-            <h2>8. Acknowledgments &amp; Data Credit</h2>
-            <p>Data provided by <a href="https://www.flyrank.com/" target="_blank" style="color:var(--accent-light)">FlyRank</a> through a pseudonymised, public-safe release on <a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank" style="color:var(--accent-light)">Hugging Face</a>. Google Search Console metrics collected and anonymised by FlyRank&rsquo;s data engineering team. All analysis performed on Google Colab.</p>
+            <div class="section-eyebrow">08 &mdash; Acknowledgments</div>
+            <h2>Acknowledgments &amp; Data Credit</h2>
+            <p>Data provided by <a href="https://www.flyrank.com/" target="_blank">FlyRank</a> through a pseudonymised, public-safe release on <a href="https://huggingface.co/datasets/FlyRank/internship-warehouse" target="_blank">Hugging Face</a>. Google Search Console metrics collected and anonymised by FlyRank&rsquo;s data engineering team. All analysis performed on Google Colab.</p>
         </section>
 
-        <!-- FOOTER -->
-        <footer>
-            <p>&copy; 2026 &middot; <a href="https://github.com/Artasam/Machine-Learning">Artasam/Machine-Learning</a> &middot; FlyRank ML Internship</p>
-        </footer>
-
     </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 &middot; <a href="https://github.com/Artasam/Machine-Learning">Artasam/Machine-Learning</a> &middot; FlyRank ML Internship</p>
+        </div>
+    </footer>
+
 </body>
 </html>
