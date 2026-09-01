@@ -1,0 +1,36 @@
+{
+  "notebook": "w07_action_playbook.ipynb",
+  "reference_period": "March 2026",
+  "seed": 42,
+  "data": {
+    "total_pages": 92548,
+    "total_clients": 40,
+    "base_rate": 0.2864
+  },
+  "recommended_system": "Rule Baseline (ML-07)",
+  "why_not_ml_model": "LightGBM achieved P@50 = 0.44 on unseen clients vs Rule Baseline P@50 = 0.64 (ML-08 grouped split). ML model memorised client identity under random split (50-point gap at P@20, ML-09 audit). Rule is deployed until richer content-level features are available.",
+  "precision_at_k": {
+    "P@10": 0.6,
+    "P@20": 0.5,
+    "P@50": 0.42,
+    "P@100": 0.39,
+    "P@200": 0.39
+  },
+  "limitations": [
+    "Single month (Mar 2026) \u2014 no seasonality control",
+    "40 clients \u2014 generalisation beyond this portfolio is unverified",
+    "20% decline threshold is arbitrary",
+    "No content-level signals \u2014 traffic metrics only",
+    "Observational \u2014 no causal claims without a controlled experiment"
+  ],
+  "retrain_triggers": [
+    "P@50 drops below base rate (28.6%)",
+    "New content-level features available (content age, keyword difficulty)",
+    "Major Google algorithm update",
+    "Client portfolio changes by > 10%"
+  ],
+  "exports": [
+    "work/outputs/action_queue.csv",
+    "work/outputs/playbook_summary.json"
+  ]
+}

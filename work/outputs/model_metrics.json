@@ -1,0 +1,42 @@
+{
+  "seed": 42,
+  "split": "GroupShuffleSplit_by_client",
+  "test_size": 22531,
+  "test_base_rate": 0.3695,
+  "features": [
+    "log_prev_impressions",
+    "prev_ctr",
+    "prev_avg_position",
+    "prev_days_active"
+  ],
+  "results": {
+    "Rule Baseline (ML-07)": {
+      "P@10": 0.6,
+      "P@20": 0.75,
+      "P@50": 0.64,
+      "P@100": 0.6,
+      "P@200": 0.54
+    },
+    "Logistic Regression": {
+      "P@10": 0.2,
+      "P@20": 0.15,
+      "P@50": 0.2,
+      "P@100": 0.22,
+      "P@200": 0.235
+    },
+    "Random Forest": {
+      "P@10": 0.1,
+      "P@20": 0.25,
+      "P@50": 0.3,
+      "P@100": 0.4,
+      "P@200": 0.445
+    },
+    "LightGBM": {
+      "P@10": 0.4,
+      "P@20": 0.4,
+      "P@50": 0.44,
+      "P@100": 0.49,
+      "P@200": 0.515
+    }
+  }
+}

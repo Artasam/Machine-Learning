@@ -1,0 +1,66 @@
+{
+  "title": "Predicting Content Decay in Search: When Rules Beat Models",
+  "seed": 42,
+  "data": {
+    "source": "FlyRank Internship Warehouse (hf://datasets/FlyRank/internship-warehouse)",
+    "table": "fact_content_daily_performance (month=2026-03)",
+    "total_pages": 92548,
+    "total_clients": 40,
+    "feature_window": "Mar 01-15, 2026",
+    "label_window": "Mar 16-31, 2026",
+    "base_rate_full_pool": 0.2864
+  },
+  "validation": {
+    "split": "GroupShuffleSplit by client_hash_id",
+    "test_size": 22531,
+    "test_clients": 8,
+    "test_base_rate": 0.3695
+  },
+  "results_grouped_split": {
+    "Rule Baseline (ML-07)": {
+      "P@10": 0.6,
+      "P@20": 0.75,
+      "P@50": 0.64,
+      "P@100": 0.6,
+      "P@200": 0.54
+    },
+    "Logistic Regression": {
+      "P@10": 0.2,
+      "P@20": 0.15,
+      "P@50": 0.2,
+      "P@100": 0.22,
+      "P@200": 0.235
+    },
+    "Random Forest": {
+      "P@10": 0.1,
+      "P@20": 0.2,
+      "P@50": 0.26,
+      "P@100": 0.29,
+      "P@200": 0.415
+    },
+    "LightGBM": {
+      "P@10": 0.4,
+      "P@20": 0.4,
+      "P@50": 0.44,
+      "P@100": 0.49,
+      "P@200": 0.515
+    }
+  },
+  "leakage_audit": "PASSED \u2014 all 3 tests clean (label-derived, window overlap, product flags)",
+  "memorisation_gap_p20": 0.25,
+  "recommended_system": "Rule Baseline (ML-07)",
+  "charts": [
+    "work/outputs/chart_precision_at_k.png",
+    "work/outputs/chart_feature_importance.png",
+    "work/outputs/chart_decline_by_tier.png"
+  ],
+  "notebooks": [
+    "work/notebooks/w05_signal_audit.ipynb (ML-06)",
+    "work/notebooks/w05_baseline.ipynb (ML-07)",
+    "work/notebooks/w05_model_comparison.ipynb (ML-08)",
+    "work/notebooks/w06_validation_audit.ipynb (ML-09)",
+    "work/notebooks/w07_action_playbook.ipynb (ML-10)",
+    "work/notebooks/capstone.ipynb (ML-11)"
+  ],
+  "repo": "https://github.com/Artasam/Machine-Learning"
+}
